@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Dumbbell, Target, Users, Award } from "lucide-react";
+import { ArrowRight, Dumbbell, Instagram, Star, Target, Users, Award } from "lucide-react";
 import heroImage from "@/assets/hero-training.jpg";
 import { BtnAnchor, BtnLink } from "@/components/site/Btn";
 import { CtaSection } from "@/components/site/CtaSection";
@@ -10,6 +10,7 @@ import { ServiceCard } from "@/components/site/ServiceCard";
 import { TrainerCard } from "@/components/site/TrainerCard";
 import {
   business,
+  fullAddress,
   plans,
   reviews,
   services,
@@ -23,22 +24,24 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "THE NRM FITNESS — Premium Gym & Fitness Center in Jodhpur" },
+      { title: "THE NRM FITNESS | Gym & Fitness Center in Jodhpur" },
       {
         name: "description",
         content:
-          "THE NRM FITNESS in Jodhpur: gym training, personal training, CrossFit, Zumba, yoga, swimming and weight management with expert coaches.",
+          "THE NRM FITNESS in Keshavnagar, Jodhpur offers gym training, personal training, CrossFit, Zumba, Yoga, swimming and weight-management fitness programs.",
       },
       {
         property: "og:title",
-        content: "THE NRM FITNESS — Premium Gym & Fitness Center in Jodhpur",
+        content: "THE NRM FITNESS | Gym & Fitness Center in Jodhpur",
       },
       {
         property: "og:description",
         content:
-          "Premium equipment, expert coaching and result-driven programs in Jodhpur, Rajasthan.",
+          "Gym training, personal training, CrossFit, Zumba, Yoga and swimming at Ashoka Plaza, Pal Road, Keshavnagar, Jodhpur.",
       },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -46,23 +49,35 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "HealthClub",
           name: business.name,
-          description: business.description,
+          description: business.longDescription,
           telephone: business.phoneTel,
-          email: business.email,
+          foundingDate: business.established,
           address: {
             "@type": "PostalAddress",
-            streetAddress: business.addressLine,
+            streetAddress: `${business.addressLine}, ${business.addressLine2}`,
             addressLocality: business.city,
             addressRegion: business.state,
+            postalCode: business.postalCode,
             addressCountry: "IN",
           },
+          sameAs: [business.social.instagram],
           hasMap: business.mapsUrl,
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: business.rating,
+            ratingCount: business.ratingCount.replace(/\D/g, ""),
+            bestRating: "5",
+          },
+          knowsAbout: services.map((s) => s.title),
+          areaServed: `${business.city}, ${business.state}`,
+          address_note: fullAddress,
         }),
       },
     ],
   }),
   component: Index,
 });
+
 
 const icons = { dumbbell: Dumbbell, whistle: Award, target: Target, users: Users };
 
