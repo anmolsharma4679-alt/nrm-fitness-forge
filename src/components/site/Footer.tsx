@@ -1,8 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { business, navLinks, whatsappLink } from "@/data/site";
+import { BtnLink } from "./Btn";
 
 export function Footer() {
+  const socials = [
+    { href: business.social.instagram, Icon: Instagram, label: "Instagram" },
+    { href: business.social.facebook, Icon: Facebook, label: "Facebook" },
+    { href: business.social.youtube, Icon: Youtube, label: "YouTube" },
+  ].filter((s) => Boolean(s.href));
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
@@ -11,14 +18,11 @@ export function Footer() {
             THE NRM <span className="text-primary">FITNESS</span>
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            {business.description}
+            Premium fitness and training in {business.city}. Established in{" "}
+            {business.established}.
           </p>
           <div className="mt-6 flex gap-3">
-            {[
-              { href: business.social.instagram, Icon: Instagram, label: "Instagram" },
-              { href: business.social.facebook, Icon: Facebook, label: "Facebook" },
-              { href: business.social.youtube, Icon: Youtube, label: "YouTube" },
-            ].map(({ href, Icon, label }) => (
+            {socials.map(({ href, Icon, label }) => (
               <a
                 key={label}
                 href={href}
@@ -31,6 +35,14 @@ export function Footer() {
               </a>
             ))}
           </div>
+          <a
+            href={business.social.instagram}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-4 inline-block text-sm text-muted-foreground transition-colors hover:text-primary"
+          >
+            {business.social.instagramHandle}
+          </a>
         </div>
 
         <div>
@@ -72,9 +84,18 @@ export function Footer() {
               </a>
             </li>
             <li>
-              {business.addressLine}
-              <br />
-              {business.addressLocality}
+              <a
+                className="hover:text-foreground"
+                href={business.mapsUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {business.addressLine},
+                <br />
+                {business.addressLine2},
+                <br />
+                {business.addressLocality}
+              </a>
             </li>
           </ul>
         </div>
@@ -83,14 +104,21 @@ export function Footer() {
           <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             Opening Hours
           </h3>
-          <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-            {business.hours.map((h) => (
-              <li key={h.days}>
-                <span className="block text-foreground">{h.days}</span>
-                {h.time}
-              </li>
-            ))}
-          </ul>
+          {business.hoursConfirmed ? (
+            <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+              {business.hours.map((h) => (
+                <li key={h.days}>
+                  <span className="block text-foreground">{h.days}</span>
+                  {h.time}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-5 text-sm text-muted-foreground">{business.hoursFallback}</p>
+          )}
+          <BtnLink to="/membership" size="sm" className="mt-6">
+            Join Now
+          </BtnLink>
         </div>
       </div>
 

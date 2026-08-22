@@ -1,6 +1,9 @@
 /**
- * SINGLE SOURCE OF TRUTH — replace placeholders with the client's real data.
- * Anything marked PLACEHOLDER must be confirmed by THE NRM FITNESS before launch.
+ * SINGLE SOURCE OF TRUTH — real THE NRM FITNESS business data.
+ *
+ * Owner-editable: everything below can be updated in this one file.
+ * Anything still marked PLACEHOLDER is NOT shown as fact on the website —
+ * the UI falls back to "Contact us" style copy instead of inventing details.
  */
 
 import svcGym from "@/assets/svc-gym.jpg";
@@ -26,40 +29,63 @@ export const business = {
   city: "Jodhpur",
   state: "Rajasthan",
   country: "India",
-  tagline: "Premium fitness. Expert coaching. Real transformation.",
+  established: "2023",
+  tagline: "Train with purpose. Build strength. Stay consistent.",
   description:
-    "A modern fitness center in Jodhpur offering gym training, personal training, CrossFit, Zumba, yoga, swimming and structured fitness programs.",
-  /** PLACEHOLDER — replace with the real street address */
-  addressLine: "Address line 1, Area Name",
-  addressLocality: "Jodhpur, Rajasthan 342001",
-  /** PLACEHOLDER — replace with the real phone number (E.164 for tel:) */
-  phoneDisplay: "+91 XXXXX XXXXX",
-  phoneTel: "+910000000000",
-  /** PLACEHOLDER — WhatsApp number in international format, digits only */
-  whatsapp: "910000000000",
-  /** PLACEHOLDER — replace with the real inbox */
-  email: "hello@example.com",
-  /** PLACEHOLDER — replace with real opening hours */
+    "Gym training, personal training, CrossFit, Zumba, Yoga, Swimming and fitness programs in Jodhpur.",
+  longDescription:
+    "THE NRM FITNESS is a modern unisex fitness center in Keshavnagar, Pal Road, Jodhpur — quality equipment, supportive trainers and a welcoming, female-friendly environment.",
+
+  /** Real address */
+  addressLine: "Ashoka Plaza, Opposite Ashok Udhyan",
+  addressLine2: "Pal Road, Keshavnagar",
+  addressLocality: "Jodhpur, Rajasthan 342008",
+  postalCode: "342008",
+
+  /** Real phone number */
+  phoneDisplay: "+91 98283 50520",
+  phoneTel: "+919828350520",
+  /** WhatsApp — same business number, digits only, international format */
+  whatsapp: "919828350520",
+
+  /** PLACEHOLDER — no public email address supplied yet */
+  email: "",
+
+  /**
+   * Opening hours. Set `confirmed: false` while timings are unconfirmed —
+   * the site then shows `hoursFallback` instead of any invented time.
+   */
+  hoursConfirmed: false,
+  hoursFallback: "Contact us for current timings",
   hours: [
-    { days: "Mon – Sat (Morning)", time: "0:00 AM – 0:00 AM (to be confirmed)" },
-    { days: "Mon – Sat (Evening)", time: "0:00 PM – 0:00 PM (to be confirmed)" },
-    { days: "Sunday", time: "To be confirmed" },
+    { days: "Monday – Saturday", time: "PLACEHOLDER" },
+    { days: "Sunday", time: "PLACEHOLDER" },
   ],
-  /** PLACEHOLDER — replace with the gym's Google Maps place link */
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=gym+in+Jodhpur+Rajasthan",
+
+  /** Google Maps — address search link (no invented coordinates) */
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=THE+NRM+FITNESS+Ashoka+Plaza+Pal+Road+Keshavnagar+Jodhpur+Rajasthan+342008",
   mapsEmbedUrl:
-    "https://www.google.com/maps?q=Jodhpur,+Rajasthan,+India&output=embed",
+    "https://www.google.com/maps?q=Ashoka+Plaza,+Pal+Road,+Keshavnagar,+Jodhpur,+Rajasthan+342008&output=embed",
+
   social: {
-    instagram: "https://instagram.com/",
-    facebook: "https://facebook.com/",
-    youtube: "https://youtube.com/",
+    instagram: "https://www.instagram.com/thenrmgym/",
+    instagramHandle: "@thenrmgym",
+    /** PLACEHOLDER — leave empty until verified; empty links are hidden */
+    facebook: "",
+    youtube: "",
   },
-  /** PLACEHOLDER — editable stats */
+
+  /** Editable reputation values */
   rating: "4.9",
+  ratingCount: "459+",
   ratingSource: "Google Rating",
-  memberCount: "500+",
-  /** Set to false to hide prices and show "GET MEMBERSHIP DETAILS" instead */
-  showPrices: true,
+  /** Google Business Profile reviews link — can be updated later */
+  reviewsUrl:
+    "https://www.google.com/maps/search/?api=1&query=THE+NRM+FITNESS+Jodhpur",
+
+  /** Keep false until the client approves real membership prices */
+  showPrices: false,
 } as const;
 
 export const canonicalBase = "";
@@ -75,32 +101,32 @@ export const navLinks = [
 ] as const;
 
 export const stats = [
-  { value: `${business.rating}★`, label: "Google Rating" },
-  { value: "EXPERT", label: "Coaching" },
-  { value: "7+", label: "Fitness Programs" },
-  { value: "JODHPUR", label: "Local Fitness Community" },
+  { value: `${business.rating}★`, label: business.ratingSource },
+  { value: `${business.ratingCount}`, label: "Ratings" },
+  { value: `SINCE ${business.established}`, label: "Established" },
+  { value: "JODHPUR", label: "Keshavnagar, Pal Road" },
 ] as const;
 
 export const whyUs = [
   {
     icon: "dumbbell",
-    title: "PREMIUM EQUIPMENT",
-    text: "Modern equipment designed for effective strength and fitness training.",
+    title: "QUALITY EQUIPMENT",
+    text: "A well-equipped environment for strength, cardio and fitness training.",
   },
   {
     icon: "whistle",
-    title: "EXPERT COACHING",
-    text: "Professional guidance to help members train safely and effectively.",
+    title: "SUPPORTIVE TRAINERS",
+    text: "Guidance and motivation to help members stay consistent.",
   },
   {
     icon: "target",
-    title: "RESULT DRIVEN",
-    text: "Programs designed around individual fitness goals.",
+    title: "MULTIPLE FITNESS OPTIONS",
+    text: "Gym training, personal training, CrossFit, Zumba, Yoga, Swimming and more.",
   },
   {
     icon: "users",
-    title: "SUPPORTIVE COMMUNITY",
-    text: "A motivating environment where members can stay consistent.",
+    title: "WELCOMING ENVIRONMENT",
+    text: "A comfortable, motivating and inclusive fitness environment for everyone.",
   },
 ] as const;
 
@@ -116,166 +142,157 @@ export const services: Service[] = [
   {
     slug: "gym-training",
     title: "GYM TRAINING",
-    text: "Build strength, improve fitness and develop consistency.",
+    text: "Strength, cardio and general fitness training in a modern gym environment.",
     image: svcGym,
     alt: "Member training with a barbell on the gym floor at THE NRM FITNESS",
   },
   {
     slug: "personal-training",
     title: "PERSONAL TRAINING",
-    text: "One-on-one coaching focused on your individual goals.",
+    text: "Personalized coaching and guidance around individual fitness goals.",
     image: svcPersonal,
     alt: "Personal trainer coaching a member through a dumbbell exercise",
   },
   {
     slug: "crossfit",
     title: "CROSSFIT",
-    text: "High-intensity functional training for strength and conditioning.",
+    text: "Functional, high-intensity training focused on strength and conditioning.",
     image: svcCrossfit,
     alt: "Functional training with ropes and kettlebells in a dark gym",
   },
   {
     slug: "zumba",
     title: "ZUMBA",
-    text: "High-energy group fitness sessions combining movement and music.",
+    text: "Energetic group fitness sessions combining movement, music and exercise.",
     image: svcZumba,
     alt: "Group zumba dance fitness class in progress",
   },
   {
     slug: "yoga",
     title: "YOGA",
-    text: "Improve mobility, flexibility, balance and mind-body connection.",
+    text: "Yoga-focused movement, flexibility, mobility and mind-body practice.",
     image: svcYoga,
     alt: "Member holding a yoga warrior pose in a studio",
   },
   {
-    slug: "weight-management",
-    title: "WEIGHT MANAGEMENT",
-    text: "Structured fitness support for healthy weight-management goals.",
-    image: svcWeight,
-    alt: "Member running on a treadmill in the cardio zone",
-  },
-  {
     slug: "swimming",
     title: "SWIMMING",
-    text: "Fitness and conditioning through swimming.",
+    text: "Swimming and fitness activities in the available pool facility.",
     image: svcSwimming,
     alt: "Swimmer doing freestyle laps in an indoor pool",
   },
+  {
+    slug: "weight-management",
+    title: "WEIGHT MANAGEMENT",
+    text: "Fitness-focused support for people working toward healthy weight-management goals.",
+    image: svcWeight,
+    alt: "Member running on a treadmill in the cardio zone",
+  },
 ];
 
-/** PLACEHOLDER trainers — names, roles and experience must come from the client */
+/**
+ * PLACEHOLDER trainers — no names, certifications or experience are claimed.
+ * Replace `name`, `role` and `bio` once the client supplies real profiles.
+ */
 export const trainers = [
   {
-    name: "TRAINER NAME",
-    role: "Strength & Conditioning Coach",
-    experience: "X+ YEARS EXPERIENCE",
-    specialty: "Strength · Muscle Gain",
-    bio: "Short trainer bio placeholder. Replace with the coach's real background and training approach.",
+    name: "NRM COACH",
+    role: "Gym & Strength Training",
+    experience: "PROFILE COMING SOON",
+    specialty: "Strength · Gym",
+    bio: "Coach details coming soon. Contact us to know more about training at THE NRM FITNESS.",
     image: trainer1,
-    alt: "Portrait placeholder of a strength and conditioning coach",
+    alt: "Coach at THE NRM FITNESS gym floor in Jodhpur",
   },
   {
-    name: "TRAINER NAME",
-    role: "Group Fitness & Zumba Coach",
-    experience: "X+ YEARS EXPERIENCE",
-    specialty: "Zumba · Weight Loss",
-    bio: "Short trainer bio placeholder. Replace with the coach's real background and training approach.",
+    name: "NRM COACH",
+    role: "Group Fitness & Zumba",
+    experience: "PROFILE COMING SOON",
+    specialty: "Zumba · Group Fitness",
+    bio: "Coach details coming soon. Contact us to know more about group classes at THE NRM FITNESS.",
     image: trainer2,
-    alt: "Portrait placeholder of a group fitness and zumba coach",
+    alt: "Group fitness coach at THE NRM FITNESS in Jodhpur",
   },
   {
-    name: "TRAINER NAME",
-    role: "Functional Training Coach",
-    experience: "X+ YEARS EXPERIENCE",
+    name: "NRM COACH",
+    role: "CrossFit & Functional Training",
+    experience: "PROFILE COMING SOON",
     specialty: "CrossFit · Conditioning",
-    bio: "Short trainer bio placeholder. Replace with the coach's real background and training approach.",
+    bio: "Coach details coming soon. Contact us to know more about CrossFit at THE NRM FITNESS.",
     image: trainer3,
-    alt: "Portrait placeholder of a functional training coach",
+    alt: "Functional training coach at THE NRM FITNESS in Jodhpur",
   },
 ] as const;
 
-/** PLACEHOLDER pricing — replace with the client's approved plans and prices */
+/**
+ * Membership plans. Prices are NOT published (`business.showPrices` is false)
+ * until the client supplies approved pricing.
+ */
 export const plans = [
   {
-    name: "STARTER",
-    summary: "Gym access",
-    price: "₹XXXX",
-    period: "/ MONTH",
+    name: "GYM",
+    summary: "Strength, cardio and general fitness",
+    price: "",
+    period: "",
     features: ["Full gym floor access", "Induction session", "Locker access"],
     featured: false,
   },
   {
-    name: "FITNESS",
-    summary: "Gym + group programs",
-    price: "₹XXXX",
-    period: "/ 3 MONTHS",
-    features: [
-      "Everything in Starter",
-      "Group classes (Zumba, Yoga)",
-      "Fitness assessment",
-    ],
+    name: "GYM + GROUP FITNESS",
+    summary: "Gym access plus group programs",
+    price: "",
+    period: "",
+    features: ["Full gym access", "Zumba & Yoga group classes", "CrossFit sessions"],
     featured: true,
   },
   {
-    name: "TRANSFORMATION",
-    summary: "Gym + personal training",
-    price: "₹XXXX",
-    period: "/ MONTH",
-    features: [
-      "Everything in Fitness",
-      "Personal training sessions",
-      "Goal-based program",
-    ],
+    name: "PERSONAL TRAINING",
+    summary: "One-on-one coaching",
+    price: "",
+    period: "",
+    features: ["Personal trainer sessions", "Goal-based program", "Progress guidance"],
     featured: false,
   },
   {
-    name: "PREMIUM",
-    summary: "Custom fitness experience",
-    price: "₹XXXX",
-    period: "/ YEAR",
-    features: [
-      "All programs included",
-      "Priority coach scheduling",
-      "Progress reviews",
-    ],
+    name: "WEIGHT MANAGEMENT",
+    summary: "Fitness support for weight goals",
+    price: "",
+    period: "",
+    features: ["Structured training plan", "Trainer guidance", "Consistency tracking"],
     featured: false,
   },
 ] as const;
 
-/** PLACEHOLDER transformations — do not publish until real member stories are supplied */
+/** PLACEHOLDER — no member transformations are published until real, consented stories are supplied */
 export const transformations = [
   {
-    name: "MEMBER NAME (PLACEHOLDER)",
+    name: "COMING SOON",
     goal: "Weight Loss",
-    story: "Placeholder story — replace with a real, consented member story.",
+    story: "Real member transformations will be featured here with their consent.",
     before: transformBefore,
     after: transformAfter,
   },
   {
-    name: "MEMBER NAME (PLACEHOLDER)",
+    name: "COMING SOON",
     goal: "Muscle Gain",
-    story: "Placeholder story — replace with a real, consented member story.",
+    story: "Real member transformations will be featured here with their consent.",
     before: transformBefore,
     after: transformAfter,
   },
   {
-    name: "MEMBER NAME (PLACEHOLDER)",
+    name: "COMING SOON",
     goal: "General Fitness",
-    story: "Placeholder story — replace with a real, consented member story.",
+    story: "Real member transformations will be featured here with their consent.",
     before: transformBefore,
     after: transformAfter,
   },
 ] as const;
 
-/** PLACEHOLDER reviews — replace with genuine Google/member reviews */
-export const reviews = [
-  { text: "REAL MEMBER REVIEW WILL BE ADDED HERE", name: "MEMBER NAME", stars: 5 },
-  { text: "REAL MEMBER REVIEW WILL BE ADDED HERE", name: "MEMBER NAME", stars: 5 },
-  { text: "REAL MEMBER REVIEW WILL BE ADDED HERE", name: "MEMBER NAME", stars: 5 },
-  { text: "REAL MEMBER REVIEW WILL BE ADDED HERE", name: "MEMBER NAME", stars: 5 },
-  { text: "REAL MEMBER REVIEW WILL BE ADDED HERE", name: "MEMBER NAME", stars: 5 },
-] as const;
+/**
+ * Genuine reviews only. Keep empty until real Google/member reviews (with names)
+ * are supplied — the site then shows the verified rating and a link to Google.
+ */
+export const reviews: { text: string; name: string; stars: number }[] = [];
 
 export const galleryCategories = [
   "All",
@@ -294,12 +311,13 @@ export type GalleryItem = {
   category: (typeof galleryCategories)[number];
 };
 
+/** Replace `src` values with real NRM Fitness photos — structure stays the same */
 export const gallery: GalleryItem[] = [
   { src: galInterior, alt: "Gym interior with squat racks and mirrors", category: "Interior" },
   { src: svcGym, alt: "Barbell training on the gym floor", category: "Gym" },
   { src: galEquipment, alt: "Dumbbells and kettlebells on the rack", category: "Equipment" },
   { src: galTraining, alt: "Member training with cable ropes", category: "Training" },
-  { src: trainer1, alt: "Coach portrait at THE NRM FITNESS", category: "Trainers" },
+  { src: trainer1, alt: "Coach at THE NRM FITNESS", category: "Trainers" },
   { src: galGroup, alt: "Group fitness class in the studio", category: "Group Classes" },
   { src: svcSwimming, alt: "Swimming lap training in the pool", category: "Swimming" },
   { src: svcCrossfit, alt: "Functional CrossFit-style training area", category: "Training" },
@@ -330,6 +348,9 @@ export const programOptions = [
 
 export const contactMethods = ["WhatsApp", "Phone Call", "Either"] as const;
 
+/** Full address as a single line — used for schema and directions */
+export const fullAddress = `${business.addressLine}, ${business.addressLine2}, ${business.addressLocality}, ${business.country}`;
+
 export function whatsappLink(message?: string) {
   const text =
     message ??
@@ -355,8 +376,10 @@ export function enquiryMessage(input: {
     `Fitness Goal: ${input.goal}`,
     `Program: ${input.program}`,
     `Preferred Contact: ${input.contactMethod}`,
-    `Message: ${input.message}`,
+    input.message ? `Message: ${input.message}` : "",
     "",
     "Please contact me with membership details.",
-  ].join("\n");
+  ]
+    .filter((l, i, a) => !(l === "" && a[i - 1] === ""))
+    .join("\n");
 }
