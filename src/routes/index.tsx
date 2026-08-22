@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Dumbbell, Target, Users, Whistle } from "lucide-react";
+import { ArrowRight, Dumbbell, Target, Users, Award } from "lucide-react";
 import heroImage from "@/assets/hero-training.jpg";
 import { BtnAnchor, BtnLink } from "@/components/site/Btn";
 import { CtaSection } from "@/components/site/CtaSection";
@@ -14,6 +14,7 @@ import {
   reviews,
   services,
   stats,
+  trainers,
   transformations,
   whatsappLink,
   whyUs,
@@ -63,7 +64,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const icons = { dumbbell: Dumbbell, whistle: Whistle, target: Target, users: Users };
+const icons = { dumbbell: Dumbbell, whistle: Award, target: Target, users: Users };
 
 function Index() {
   return (
@@ -231,7 +232,7 @@ function Index() {
         <div className="container-x">
           <SectionHeading eyebrow="The team" title="Coaches who care" />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {trainersPreview().map((t, i) => (
+            {trainers.map((t, i) => (
               <Reveal key={i} delay={i * 80}>
                 <TrainerCard trainer={t} />
               </Reveal>
@@ -340,9 +341,3 @@ function Index() {
     </>
   );
 }
-
-function trainersPreview() {
-  return trainersData;
-}
-
-import { trainers as trainersData } from "@/data/site";
