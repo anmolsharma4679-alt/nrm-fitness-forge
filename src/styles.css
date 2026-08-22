@@ -148,10 +148,8 @@
   margin-inline: auto;
   max-width: 84rem;
   padding-inline: 1.25rem;
-}
 
-@media (min-width: 1024px) {
-  @utility container-x {
+  @media (min-width: 1024px) {
     padding-inline: 2.5rem;
   }
 }
