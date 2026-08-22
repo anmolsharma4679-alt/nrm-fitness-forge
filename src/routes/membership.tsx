@@ -26,7 +26,7 @@ export const Route = createFileRoute("/membership")({
       },
     ],
   }),
-  component: Membership;
+  component: Membership,
 });
 
 function Membership() {

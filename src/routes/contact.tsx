@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Btn, BtnAnchor } from "@/components/site/Btn";
 import { Reveal } from "@/components/site/Reveal";
@@ -52,7 +52,7 @@ function Contact() {
 
   const set = (k: keyof typeof form) => (v: string) => setForm((f) => ({ ...f, [k]: v }));
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     window.open(whatsappLink(enquiryMessage(form)), "_blank", "noopener,noreferrer");
   };
