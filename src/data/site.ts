@@ -188,108 +188,92 @@ export const services: Service[] = [
 ];
 
 /**
- * PLACEHOLDER trainers — no names, certifications or experience are claimed.
- * Replace `name`, `role` and `bio` once the client supplies real profiles.
+ * Coaching disciplines offered at the gym.
+ * No trainer names, photos, credentials or biographies are claimed here —
+ * add a `trainers` array with real profiles once the client supplies them.
  */
-export const trainers = [
+export const coachingDisciplines = [
   {
-    name: "NRM COACH",
-    role: "Gym & Strength Training",
-    experience: "PROFILE COMING SOON",
-    specialty: "Strength · Gym",
-    bio: "Coach details coming soon. Contact us to know more about training at THE NRM FITNESS.",
-    image: trainer1,
-    alt: "Coach at THE NRM FITNESS gym floor in Jodhpur",
+    title: "GYM & STRENGTH",
+    text: "Guidance on strength and cardio training, technique and progression on the gym floor.",
   },
   {
-    name: "NRM COACH",
-    role: "Group Fitness & Zumba",
-    experience: "PROFILE COMING SOON",
-    specialty: "Zumba · Group Fitness",
-    bio: "Coach details coming soon. Contact us to know more about group classes at THE NRM FITNESS.",
-    image: trainer2,
-    alt: "Group fitness coach at THE NRM FITNESS in Jodhpur",
+    title: "PERSONAL TRAINING",
+    text: "One-on-one coaching built around your individual fitness goal and schedule.",
   },
   {
-    name: "NRM COACH",
-    role: "CrossFit & Functional Training",
-    experience: "PROFILE COMING SOON",
-    specialty: "CrossFit · Conditioning",
-    bio: "Coach details coming soon. Contact us to know more about CrossFit at THE NRM FITNESS.",
-    image: trainer3,
-    alt: "Functional training coach at THE NRM FITNESS in Jodhpur",
+    title: "GROUP FITNESS",
+    text: "Zumba, Yoga and CrossFit-style group sessions led in a motivating environment.",
   },
 ] as const;
 
+/** Trainer profiles are not published yet — the UI shows a "coming soon" state instead. */
+export const trainerProfilesAvailable = false;
+
+/** Member transformations are not published yet — the UI shows a "coming soon" state instead. */
+export const transformationsAvailable = false;
+
 /**
- * Membership plans. Prices are NOT published (`business.showPrices` is false)
- * until the client supplies approved pricing.
+ * ─────────────────────────────────────────────────────────────────────────────
+ * MEMBERSHIP PLANS — SINGLE PLACE TO EDIT PRICING
+ *
+ * TODO: Replace temporary demo membership prices with client-approved prices
+ * before final public launch.
+ *
+ * The prices below are TEMPORARY DEMO/PLACEHOLDER VALUES for design purposes
+ * only. They are NOT verified official THE NRM FITNESS prices.
+ *
+ * How to update:
+ *   1. Edit `price` / `period` / `features` in `plans` below.
+ *   2. Set `pricingIsDemo = false` once prices are client-approved — this
+ *      removes the "indicative pricing" notice from the membership page.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
+export const pricingIsDemo = true;
+
 export const plans = [
   {
-    name: "GYM",
-    summary: "Strength, cardio and general fitness",
-    price: "",
-    period: "",
+    name: "MONTHLY",
+    summary: "Flexible month-to-month training",
+    price: "₹999",
+    period: "per month",
     features: ["Full gym floor access", "Induction session", "Locker access"],
     featured: false,
   },
   {
-    name: "GYM + GROUP FITNESS",
-    summary: "Gym access plus group programs",
-    price: "",
-    period: "",
-    features: ["Full gym access", "Zumba & Yoga group classes", "CrossFit sessions"],
+    name: "QUARTERLY",
+    summary: "Three months of consistency",
+    price: "₹2,499",
+    period: "per 3 months",
+    features: [
+      "Full gym floor access",
+      "Group fitness sessions",
+      "Trainer guidance on the floor",
+    ],
     featured: true,
   },
   {
-    name: "PERSONAL TRAINING",
-    summary: "One-on-one coaching",
-    price: "",
-    period: "",
-    features: ["Personal trainer sessions", "Goal-based program", "Progress guidance"],
+    name: "HALF-YEARLY",
+    summary: "Six months, better value",
+    price: "₹4,499",
+    period: "per 6 months",
+    features: ["Full gym floor access", "Group fitness sessions", "Goal-based programming"],
     featured: false,
   },
   {
-    name: "WEIGHT MANAGEMENT",
-    summary: "Fitness support for weight goals",
-    price: "",
-    period: "",
-    features: ["Structured training plan", "Trainer guidance", "Consistency tracking"],
+    name: "YEARLY",
+    summary: "Best value for the long run",
+    price: "₹7,999",
+    period: "per 12 months",
+    features: [
+      "Full gym floor access",
+      "Group fitness sessions",
+      "Priority membership support",
+    ],
     featured: false,
   },
 ] as const;
 
-/** PLACEHOLDER — no member transformations are published until real, consented stories are supplied */
-export const transformations = [
-  {
-    name: "COMING SOON",
-    goal: "Weight Loss",
-    story: "Real member transformations will be featured here with their consent.",
-    before: transformBefore,
-    after: transformAfter,
-  },
-  {
-    name: "COMING SOON",
-    goal: "Muscle Gain",
-    story: "Real member transformations will be featured here with their consent.",
-    before: transformBefore,
-    after: transformAfter,
-  },
-  {
-    name: "COMING SOON",
-    goal: "General Fitness",
-    story: "Real member transformations will be featured here with their consent.",
-    before: transformBefore,
-    after: transformAfter,
-  },
-] as const;
-
-/**
- * Genuine reviews only. Keep empty until real Google/member reviews (with names)
- * are supplied — the site then shows the verified rating and a link to Google.
- */
-export const reviews: { text: string; name: string; stars: number }[] = [];
 
 export const galleryCategories = [
   "All",
