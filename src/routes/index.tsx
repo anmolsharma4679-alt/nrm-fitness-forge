@@ -1,22 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Dumbbell, Instagram, Star, Target, Users, Award } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  Dumbbell,
+  Instagram,
+  MessageCircle,
+  Sparkles,
+  Star,
+  Target,
+  Users,
+} from "lucide-react";
 import heroImage from "@/assets/hero-training.jpg";
+import galInterior from "@/assets/gal-interior.jpg";
 import { BtnAnchor, BtnLink } from "@/components/site/Btn";
 import { CtaSection } from "@/components/site/CtaSection";
 import { Reveal } from "@/components/site/Reveal";
-import { ReviewCard } from "@/components/site/ReviewCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ServiceCard } from "@/components/site/ServiceCard";
-import { TrainerCard } from "@/components/site/TrainerCard";
 import {
   business,
+  coachingDisciplines,
   fullAddress,
   plans,
-  reviews,
+  pricingIsDemo,
   services,
   stats,
-  trainers,
-  transformations,
   whatsappLink,
   whyUs,
 } from "@/data/site";
@@ -28,7 +36,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "THE NRM FITNESS in Keshavnagar, Jodhpur offers gym training, personal training, CrossFit, Zumba, Yoga, swimming and weight-management fitness programs.",
+          "THE NRM FITNESS in Keshavnagar, Pal Road, Jodhpur offers gym training, personal training, CrossFit, Zumba, Yoga, swimming and fitness programs.",
       },
       {
         property: "og:title",
@@ -70,14 +78,12 @@ export const Route = createFileRoute("/")({
           },
           knowsAbout: services.map((s) => s.title),
           areaServed: `${business.city}, ${business.state}`,
-          address_note: fullAddress,
         }),
       },
     ],
   }),
   component: Index,
 });
-
 
 const icons = { dumbbell: Dumbbell, whistle: Award, target: Target, users: Users };
 
@@ -98,7 +104,7 @@ function Index() {
         <div className="container-x relative py-24">
           <Reveal className="max-w-3xl">
             <p className="eyebrow">
-              {business.city}, {business.state}
+              {business.city}, {business.state} · Since {business.established}
             </p>
             <h1 className="display-xl mt-5">
               Build the body.
@@ -106,7 +112,10 @@ function Index() {
               <span className="text-primary">Build the discipline.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {business.tagline} {business.description}
+              {business.tagline}
+            </p>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              {business.description}
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <BtnLink to="/membership" size="lg">
@@ -130,7 +139,7 @@ function Index() {
         <div className="container-x grid grid-cols-2 gap-8 py-12 lg:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
-              <p className="font-display text-3xl uppercase text-primary sm:text-4xl">
+              <p className="font-display text-2xl uppercase text-primary sm:text-4xl">
                 {s.value}
               </p>
               <p className="mt-2 text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
@@ -179,7 +188,7 @@ function Index() {
           <SectionHeading
             eyebrow="Programs"
             title="Train your way"
-            sub="Seven programs under one roof — pick the one that matches your goal."
+            sub={business.description}
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.slice(0, 6).map((s, i) => (
@@ -196,63 +205,75 @@ function Index() {
         </div>
       </section>
 
+      {/* Transformations — no results are claimed until real, consented member stories exist */}
       <section className="section-pad">
-        <div className="container-x">
-          <SectionHeading
-            eyebrow="Results"
-            title="Transformations"
-            sub="Placeholder transformations — real, consented member stories will replace these before launch."
-          />
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {transformations.map((t, i) => (
-              <Reveal
-                key={t.name + i}
-                delay={i * 80}
-                className="border border-border bg-card"
+        <div className="container-x grid gap-10 lg:grid-cols-2 lg:items-center">
+          <Reveal className="border border-border">
+            <img
+              src={galInterior}
+              alt="Training floor with racks and mirrors at THE NRM FITNESS"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="eyebrow">Member journeys</p>
+            <h2 className="display-lg mt-4">
+              Transformations
+              <br />
+              <span className="text-primary">coming soon</span>
+            </h2>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              We only publish member progress with permission. Real journeys from THE NRM
+              FITNESS members will be featured here as they are shared with us — no stock
+              stories, no exaggerated claims.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Want to start yours? Book a visit and train with structure, guidance and
+              consistency.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <BtnLink to="/membership">Start Training</BtnLink>
+              <BtnAnchor
+                href={business.social.instagram}
+                target="_blank"
+                rel="noreferrer noopener"
+                variant="outline"
               >
-                <div className="grid grid-cols-2">
-                  {[
-                    { src: t.before, label: "Before" },
-                    { src: t.after, label: "After" },
-                  ].map((img) => (
-                    <div key={img.label} className="relative aspect-3/4 overflow-hidden">
-                      <img
-                        src={img.src}
-                        alt={`${img.label} placeholder image`}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
-                      <span className="absolute bottom-2 left-2 bg-background/80 px-2 py-1 text-[0.58rem] font-bold uppercase tracking-[0.16em] text-primary">
-                        {img.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div className="p-6">
-                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-primary">
-                    {t.goal}
-                  </p>
-                  <h3 className="mt-3 font-display text-lg uppercase">{t.name}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {t.story}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+                <Instagram size={15} /> {business.social.instagramHandle}
+              </BtnAnchor>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="section-pad border-y border-border bg-surface">
         <div className="container-x">
-          <SectionHeading eyebrow="The team" title="Coaches who care" />
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {trainers.map((t, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <TrainerCard trainer={t} />
+          <SectionHeading
+            eyebrow="Coaching"
+            title="Guided every session"
+            sub="Our coaching support covers strength, personal training and group fitness. Individual trainer profiles are coming soon."
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {coachingDisciplines.map((d, i) => (
+              <Reveal
+                key={d.title}
+                delay={i * 80}
+                className="border border-border bg-card p-7 transition-colors duration-300 hover:border-primary/60"
+              >
+                <Sparkles className="text-primary" size={24} />
+                <h3 className="mt-6 font-display text-xl uppercase">{d.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {d.text}
+                </p>
               </Reveal>
             ))}
           </div>
+          <Reveal className="mt-10">
+            <BtnLink to="/trainers" variant="outline">
+              Meet the Team <ArrowRight size={15} />
+            </BtnLink>
+          </Reveal>
         </div>
       </section>
 
@@ -260,8 +281,12 @@ function Index() {
         <div className="container-x">
           <SectionHeading
             eyebrow="Membership"
-            title="Plans built around you"
-            sub="Flexible plans for every goal and schedule. Prices shown are placeholders."
+            title="Membership plans"
+            sub={
+              pricingIsDemo
+                ? "Indicative plan structure — message us on WhatsApp for current membership details and offers."
+                : "Flexible plans for every goal and schedule."
+            }
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {plans.map((p, i) => (
@@ -291,25 +316,50 @@ function Index() {
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-10">
-            <BtnLink to="/membership">Compare Plans</BtnLink>
+          <Reveal className="mt-10 flex flex-wrap gap-3">
+            <BtnLink to="/membership">Get Membership Details</BtnLink>
+            <BtnAnchor
+              href={whatsappLink()}
+              target="_blank"
+              rel="noreferrer noopener"
+              variant="outline"
+            >
+              Enquire on WhatsApp
+            </BtnAnchor>
           </Reveal>
         </div>
       </section>
 
       <section className="section-pad border-t border-border bg-surface">
         <div className="container-x">
-          <SectionHeading
-            eyebrow={business.ratingSource}
-            title={`${business.rating}★ from our members`}
-          />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {reviews.slice(0, 3).map((r, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <ReviewCard review={r} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mx-auto max-w-2xl border border-border bg-card p-8 text-center sm:p-12">
+            <div className="flex justify-center gap-1 text-primary">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={18} fill="currentColor" />
+              ))}
+            </div>
+            <p className="mt-6 font-display text-4xl uppercase text-primary sm:text-5xl">
+              {business.rating}★
+            </p>
+            <p className="mt-3 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              {business.ratingSource} · {business.ratingCount} ratings
+            </p>
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Rated by members of THE NRM FITNESS in {business.city}. Read what people say
+              on our Google listing.
+            </p>
+            {business.reviewsUrl ? (
+              <BtnAnchor
+                href={business.reviewsUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                variant="outline"
+                className="mt-8"
+              >
+                Read More Reviews <ArrowRight size={15} />
+              </BtnAnchor>
+            ) : null}
+          </Reveal>
         </div>
       </section>
 
@@ -321,10 +371,25 @@ function Index() {
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
               {business.addressLine}
               <br />
+              {business.addressLine2}
+              <br />
               {business.addressLocality}
+            </p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              {business.hoursConfirmed
+                ? business.hours.map((h) => `${h.days}: ${h.time}`).join(" · ")
+                : business.hoursFallback}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <BtnAnchor href={`tel:${business.phoneTel}`}>Call Now</BtnAnchor>
+              <BtnAnchor
+                href={whatsappLink()}
+                target="_blank"
+                rel="noreferrer noopener"
+                variant="dark"
+              >
+                <MessageCircle size={15} /> WhatsApp
+              </BtnAnchor>
               <BtnAnchor
                 href={business.mapsUrl}
                 target="_blank"
@@ -332,6 +397,14 @@ function Index() {
                 variant="outline"
               >
                 Get Directions
+              </BtnAnchor>
+              <BtnAnchor
+                href={business.social.instagram}
+                target="_blank"
+                rel="noreferrer noopener"
+                variant="ghost"
+              >
+                <Instagram size={15} /> {business.social.instagramHandle}
               </BtnAnchor>
             </div>
             <p className="mt-6 text-sm text-muted-foreground">
@@ -343,7 +416,7 @@ function Index() {
           </Reveal>
           <Reveal className="border border-border">
             <iframe
-              title="Map to THE NRM FITNESS in Jodhpur"
+              title={`Map to ${business.name} — ${fullAddress}`}
               src={business.mapsEmbedUrl}
               loading="lazy"
               className="h-80 w-full grayscale"
