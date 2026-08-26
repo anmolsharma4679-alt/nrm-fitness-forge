@@ -13,15 +13,12 @@ import svcZumba from "@/assets/svc-zumba.jpg";
 import svcYoga from "@/assets/svc-yoga.jpg";
 import svcWeight from "@/assets/svc-weight.jpg";
 import svcSwimming from "@/assets/svc-swimming.jpg";
-import trainer1 from "@/assets/trainer-1.jpg";
-import trainer2 from "@/assets/trainer-2.jpg";
-import trainer3 from "@/assets/trainer-3.jpg";
 import galEquipment from "@/assets/gal-equipment.jpg";
 import galInterior from "@/assets/gal-interior.jpg";
 import galGroup from "@/assets/gal-group.jpg";
 import galTraining from "@/assets/gal-training.jpg";
-import transformBefore from "@/assets/transform-before.jpg";
-import transformAfter from "@/assets/transform-after.jpg";
+import trainer1 from "@/assets/trainer-1.jpg";
+
 
 export const business = {
   name: "THE NRM FITNESS",
