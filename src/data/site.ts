@@ -299,7 +299,7 @@ export const gallery: GalleryItem[] = [
   { src: svcGym, alt: "Barbell training on the gym floor", category: "Gym" },
   { src: galEquipment, alt: "Dumbbells and kettlebells on the rack", category: "Equipment" },
   { src: galTraining, alt: "Member training with cable ropes", category: "Training" },
-  { src: trainer1, alt: "Coach at THE NRM FITNESS", category: "Trainers" },
+  { src: trainer1, alt: "Coaching support during a training session", category: "Trainers" },
   { src: galGroup, alt: "Group fitness class in the studio", category: "Group Classes" },
   { src: svcSwimming, alt: "Swimming lap training in the pool", category: "Swimming" },
   { src: svcCrossfit, alt: "Functional CrossFit-style training area", category: "Training" },
