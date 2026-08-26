@@ -81,8 +81,9 @@ export const business = {
   reviewsUrl:
     "https://www.google.com/maps/search/?api=1&query=THE+NRM+FITNESS+Jodhpur",
 
-  /** Keep false until the client approves real membership prices */
-  showPrices: false,
+  /** Show membership prices on the site. See `plans` + `pricingIsDemo` below. */
+  showPrices: true,
+
 } as const;
 
 export const canonicalBase = "";
