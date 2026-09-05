@@ -183,12 +183,14 @@ function Contact() {
                     {business.phoneDisplay}
                   </a>
                 </li>
-                <li className="flex gap-3">
-                  <Mail size={17} className="mt-0.5 shrink-0 text-primary" />
-                  <a href={`mailto:${business.email}`} className="hover:text-foreground">
-                    {business.email}
-                  </a>
-                </li>
+                {business.email ? (
+                  <li className="flex gap-3">
+                    <Mail size={17} className="mt-0.5 shrink-0 text-primary" />
+                    <a href={`mailto:${business.email}`} className="hover:text-foreground">
+                      {business.email}
+                    </a>
+                  </li>
+                ) : null}
                 <li className="flex gap-3">
                   <MapPin size={17} className="mt-0.5 shrink-0 text-primary" />
                   <span>
@@ -221,14 +223,18 @@ function Contact() {
 
             <div className="border border-border bg-card p-6">
               <h2 className="font-display text-xl uppercase">Opening hours</h2>
-              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-                {business.hours.map((h) => (
-                  <li key={h.days}>
-                    <span className="block text-foreground">{h.days}</span>
-                    {h.time}
-                  </li>
-                ))}
-              </ul>
+              {business.hoursConfirmed ? (
+                <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                  {business.hours.map((h) => (
+                    <li key={h.days}>
+                      <span className="block text-foreground">{h.days}</span>
+                      {h.time}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-5 text-sm text-muted-foreground">{business.hoursFallback}</p>
+              )}
             </div>
 
             <div className="border border-border">
